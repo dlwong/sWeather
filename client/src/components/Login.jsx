@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html>
+import React from 'react';
 
-<head>
-</head>
-
-<body>
-  <div id="app">THIS IS HTML</div>
-  <script type="text/javascript" src="bundle.js"></script>
-</body>
-
-</html>
-
-
-<!-- <html>
-  <body>
-    <form action="/login" method="post">
+const Form = () => (
+    <form>
       <div>
         <label>Username:</label>
         <input type="text" name="username" />
@@ -28,5 +15,6 @@
         <input type="submit" value="Submit" />
       </div>
     </form>
-  </body>
-</html> -->
+)
+
+export default Form;

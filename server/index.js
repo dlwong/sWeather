@@ -60,8 +60,11 @@ passport.use(new LocalStrategy(
   }
 ));
 
-app.post('/',
-  passport.authenticate('local', { failureRedirect: '/error' }),
-  function(req, res) {
-    res.redirect('/success?username='+req.user.username);
-  });
+// app.post('/',
+//   passport.authenticate('local', { failureRedirect: '/error' }),
+//   function(req, res) {
+//     res.redirect('/success');
+//   });
+
+  // app.post('/', passport.authenticate('local', { successRedirect: '/success',
+  // failureRedirect: '/error' }));
