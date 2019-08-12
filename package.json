@@ -20,7 +20,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^5.0.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

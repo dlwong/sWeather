@@ -1,14 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export default function Home() {
+  
+  const StyledLink = styled(Link)`
+    color: #6d6e71;
+    font-weight: bold;
+  `;
+
+  const Wrapper = styled.section`
+    padding: 4em;
+    text-align: center;
+  `;
+
   return(
-      <div className="container">
+      <Wrapper>
         <img src = "https://i.imgur.com/9uQz7kg.png" />
         <p>
-          <Link to="/login">LOGIN</Link><br /><br />
-          <Link to="/signup">SIGN UP</Link>
+          <StyledLink to="/login">LOGIN</StyledLink><br /><br />
+          <StyledLink to="/signup">SIGN UP</StyledLink>
         </p>
-      </div>
+      </Wrapper>
   )
 }

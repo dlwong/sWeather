@@ -4,12 +4,12 @@ const Signup = () => (
     <form>
       <div>
         <label>Username:</label>
-        <input type="text" name="username" /><br />
+        <input type="text" name="username" placeholder="username" /><br />
         <br/>
       </div>
       <div>
         <label>Password:</label>
-        <input type="password" name="password" />
+        <input type="password" name="password" placeholder="password" />
       </div><br />
       <div>
         <label>Do You Get Cold Easily?</label><br />
