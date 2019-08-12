@@ -35,7 +35,7 @@ class Login extends Component {
   render() { 
     return (
       <Wrapper>
-        <Form onSubmit={this.handlePassword} >
+        <Form>
           <div>
             <Label>Username:</Label>
             <input type="text" name="username" placeholder="Username" />
@@ -46,7 +46,7 @@ class Login extends Component {
           </div><br />
           <div>
             <Input type="submit" value="LOGIN" /><br/><br/>
-            <Input type="submit" value="FORGOT PASSWORD"/>
+            <Input type="submit" value="FORGOT PASSWORD" onClick={this.handlePassword} />
           </div>
         </Form>
       </Wrapper>
