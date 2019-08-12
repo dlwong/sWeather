@@ -11,7 +11,7 @@ export default function Password() {
             <div className="m-field">
               <label className="m-field--label">Email Address</label>
               <input type="email" name="recoverPassword.email" value="" />
-            </div>
+            </div><br/>
             <button className="m-button bg-azuren" type="submit" tabindex="0">
               <span className="l-nowrap">Reset Password</span>
             </button>

@@ -27,9 +27,12 @@ class Login extends Component {
 
   handlePassword(e) {
     e.preventDefault();
-    console.log('something')
-    history.push('/password')
-    //this.props.history.push('');
+    history.push('/password');
+  }
+
+  handleRecommendation(e) {
+    e.preventDefault();
+    history.push('/recommendation');
   }
 
   render() { 
@@ -45,7 +48,7 @@ class Login extends Component {
             <input type="password" name="password" placeholder="Password" />
           </div><br />
           <div>
-            <Input type="submit" value="LOGIN" /><br/><br/>
+            <Input type="submit" value="LOGIN" onClick={this.handleRecommendation} /><br/><br/>
             <Input type="submit" value="FORGOT PASSWORD" onClick={this.handlePassword} />
           </div>
         </Form>

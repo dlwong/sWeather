@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Recommendation = () => {
-    switch (this.state.header) {
+
+  return ( 
+    <div>
+      <h1>Hi</h1>
+    {/* switch (this.state.header) {
       case 1:
         title = 'STAY COOL';
         break;
@@ -20,7 +24,9 @@ const Recommendation = () => {
       case 6:
         title = 'ITSA WINDY DAY';
         break; 
-    }
+    } */}
+    </div>
+    )
 }
 
 export default Recommendation;

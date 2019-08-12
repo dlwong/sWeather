@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import history from './history';
 
 const Wrapper = styled.div`
 padding: 4em;
@@ -17,8 +17,9 @@ const Form = styled.form`
 
 const Signup = () => {
 
-  const handleRecommendation = () => {
-    <Link to="/recommendation"></Link>
+  const handleRecommendation = (e) => {
+    e.preventDefault();
+    history.push('/recommendation');
   }
     
   return (
