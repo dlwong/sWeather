@@ -1,8 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  font-family: 'Montserrat';
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 export default function Password() {
   return (
-        <div data-test-ref="form-div">
+        <Wrapper>
           <div className="l-text-centered">
             <h2>Reset password</h2>
             <p>Please enter your email address to request a password reset</p>
@@ -16,6 +25,6 @@ export default function Password() {
               <span className="l-nowrap">Reset Password</span>
             </button>
           </form>
-        </div>
+        </Wrapper>
   )
 }

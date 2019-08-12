@@ -1,4 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  font-family: 'Montserrat';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Recommendation = () => {
 
@@ -7,36 +16,36 @@ const Recommendation = () => {
 
   switch (randomInt) {
     case 1:
-      title = 'STAY COOL';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/cool_dog.jpeg';
+      title = 'COOPER SAYS STAY COOL';
+      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/cool.png';
       break;
     case 2:
-      title = 'HOODIE KIND OF WEATHER';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/hoodie_dog.png';
+      title = 'MAX SAYS IT\'S A HOODIE KIND OF WEATHER';
+      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/hoodie.png';
       break;
     case 3:
-      title = 'LIL CHILLY, WEAR DAT PUFFER';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/puffer_dog.jpeg';
+      title = 'MILLIE SAYS IT\'S A LIL CHILLY SO WEAR DAT PUFFER';
+      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/puffer.png';
       break;
     case 4:
-      title = 'GONNA BE RAININ\', KEEP YO\' SELF DRY';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/rain_dog.png';
+      title = 'BEAR SAYS IT\'S GONNA BE RAININ\', KEEP YO\' SELF DRY';
+      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/rain.png';
       break;    
     case 5:
-      title = 'TORNADO, NOTHIN\' YOU CAN DO ABOUT IT';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/sad_dog.png';
+      title = 'ROCKY SAYS IT\'S GONNA BE A TORNADO';
+      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/sad.png';
       break; 
     case 6:
-      title = 'ITSA WINDY DAY';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/windbreaker_dog.png';
+      title = 'DUKE SAYS IT\'S GONNA BE A WINDY DAY';
+      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/wind.png';
       break; 
   }
 
   return ( 
-    <div>
+    <Wrapper>
       <h1>{title}</h1>
       <img src={url} />
-    </div>
+    </Wrapper>
     )
 }
 
