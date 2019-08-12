@@ -1,7 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+padding: 4em;
+text-align: center;
+`;
+
+const Form = styled.form`
+  font-family: 'Montserrat';
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Signup = () => (
-    <form>
+  <Wrapper>
+    <Form>
       <div>
         <label>Username:</label>
         <input type="text" name="username" placeholder="username" /><br />
@@ -35,7 +50,8 @@ const Signup = () => (
       <div>
         <input type="submit" value="CREATE AN ACCOUNT" />
       </div><br />
-    </form>
+    </Form>
+  </Wrapper>
 )
 
 export default Signup;

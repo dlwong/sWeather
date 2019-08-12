@@ -9,7 +9,7 @@ export default function Home() {
     font-weight: bold;
   `;
 
-  const Wrapper = styled.section`
+  const Wrapper = styled.div`
     padding: 4em;
     text-align: center;
   `;
