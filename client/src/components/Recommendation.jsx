@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dog = () => {
+const Recommendation = () => {
     switch (this.state.header) {
       case 1:
         title = 'STAY COOL';
@@ -23,4 +23,4 @@ const Dog = () => {
     }
 }
 
-export default Dog;
+export default Recommendation;

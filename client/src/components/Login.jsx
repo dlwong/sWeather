@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import history from './history';
 
 const Form = styled.form`
   font-family: 'Montserrat';
@@ -22,23 +23,35 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 
-const Login = () => (
-  <Wrapper>
-    <Form>
-      <div>
-        <Label>Username:</Label>
-        <input type="text" name="username" placeholder="Username" />
-      </div><br />
-      <div>
-        <Label>Password:</Label>
-        <input type="password" name="password" placeholder="Password" />
-      </div><br />
-      <div>
-        <Input type="submit" value="LOGIN" /><br/><br/>
-        <Input type="submit" value="FORGOT PASSWORD" />
-      </div>
-    </Form>
-  </Wrapper>
-)
+class Login extends Component {
+
+  handlePassword(e) {
+    e.preventDefault();
+    console.log('something')
+    history.push('/password')
+    //this.props.history.push('');
+  }
+
+  render() { 
+    return (
+      <Wrapper>
+        <Form onSubmit={this.handlePassword} >
+          <div>
+            <Label>Username:</Label>
+            <input type="text" name="username" placeholder="Username" />
+          </div><br />
+          <div>
+            <Label>Password:</Label>
+            <input type="password" name="password" placeholder="Password" />
+          </div><br />
+          <div>
+            <Input type="submit" value="LOGIN" /><br/><br/>
+            <Input type="submit" value="FORGOT PASSWORD"/>
+          </div>
+        </Form>
+      </Wrapper>
+    )
+  }
+}
 
 export default Login;
