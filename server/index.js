@@ -17,12 +17,12 @@ app.use(passport.session());
 app.get('/success', (req, res) => res.send("success"));
 app.get('/error', (req, res) => res.send("error login"));
 
-passport.serializeUser(function(user, cb) {
+passport.serializeUser((user, cb) => {
   cb(null, user.id);
 });
 
-passport.deserializeUser(function(id, cb) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
     cb(err, user);
   });
 });
@@ -44,22 +44,23 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
       UserDetails.findOne({
         username: username
-      }, function(err, user) {
+      }, (err, user) => {
         if (err) {
           return done(err);
         }
-
+        //check if user exists
         if (!user) {
           return done(null, false);
         }
-
-        bcrypt.compare(password, user.passwordHash, (err, isValid) => {
+        //password comparisons
+        bcrypt.compare(password, user.password, (err, isValid) => {
           if (err) {
             return done(err)
           }
           if (!isValid) {
             return done(null, false)
           }
+        //passes everything
           return done(null, user)
         })
       });
@@ -71,3 +72,19 @@ app.post('/login',
   (req, res) => {
     res.redirect('/success');
   });
+
+app.post('/register', (req, res, next) => {
+  const {username, password} = req.body;
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) return next(err);
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) return next(err);
+      password = hash; 
+      // Store the user to the database, then send the response
+      UserDetails.save({
+        username: username, password: password
+      });
+    });
+  });
+  res.status(200);
+});

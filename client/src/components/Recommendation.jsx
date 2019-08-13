@@ -16,27 +16,27 @@ const Recommendation = () => {
 
   switch (randomInt) {
     case 1:
-      title = 'COOPER SAYS STAY COOL';
+      title = 'COOPER say STAY COOL';
       url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/cool.png';
       break;
     case 2:
-      title = 'MAX SAYS IT\'S A HOODIE KIND OF WEATHER';
+      title = 'MAX says IT\'S A HOODIE KIND OF WEATHER';
       url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/hoodie.png';
       break;
     case 3:
-      title = 'MILLIE SAYS IT\'S A LIL CHILLY SO WEAR DAT PUFFER';
+      title = 'MILLIE says IT\'S A LIL CHILLY SO WEAR DAT PUFFER';
       url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/puffer.png';
       break;
     case 4:
-      title = 'BEAR SAYS IT\'S GONNA BE RAININ\', KEEP YO\' SELF DRY';
+      title = 'BEAR says IT\'S GONNA BE RAININ\', KEEP YO\' SELF DRY';
       url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/rain.png';
       break;    
     case 5:
-      title = 'ROCKY SAYS IT\'S GONNA BE A TORNADO';
+      title = 'ROCKY says IT\'S GONNA BE A TORNADO';
       url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/sad.png';
       break; 
     case 6:
-      title = 'DUKE SAYS IT\'S GONNA BE A WINDY DAY';
+      title = 'DUKE says IT\'S GONNA BE A WINDY DAY';
       url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/wind.png';
       break; 
   }
