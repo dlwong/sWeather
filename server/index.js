@@ -97,8 +97,8 @@ app.post('/register', (req, res, next) => {
       // Store the user to the database, then send the response
       newUser.save(function (err) {
         if (err) {
-          res.status(205).send('account exists'); 
-          return console(err)
+          res.status(200).send('account exists'); 
+          return console.log(err);
         };
       });
     });
