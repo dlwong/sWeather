@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import styled from 'styled-components';
 import history from './history';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   padding: 4em;

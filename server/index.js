@@ -74,15 +74,20 @@ app.post('/login',
   });
 
 app.post('/register', (req, res, next) => {
-  const {username, password} = req.body;
+  let newUser = new UserDetails({
+    username: req.body.username,
+    password: req.body.password
+  });
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err);
-    bcrypt.hash(password, salt, (err, hash) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
       if (err) return next(err);
-      password = hash; 
+      console.log('before', newUser.password)
+      newUser.password = hash; 
+      console.log('after', newUser.password)
       // Store the user to the database, then send the response
-      UserDetails.save({
-        username: username, password: password
+      newUser.save(function (err) {
+        if (err) return handleError(err);
       });
     });
   });
