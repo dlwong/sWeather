@@ -38,10 +38,11 @@ class Signup extends Component {
       password
     })
       .then(response => {
+        console.log(response.data)
         if (response.data === 'success') {
           history.push('/recommendation');
         } else {
-          this.setState({error: true})
+          console.log('not registered')
         }
       })
       .catch(error => {

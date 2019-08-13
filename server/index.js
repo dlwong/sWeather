@@ -91,5 +91,5 @@ app.post('/register', (req, res, next) => {
       });
     });
   });
-  res.status(200);
+  res.status(200).send('success');
 });
