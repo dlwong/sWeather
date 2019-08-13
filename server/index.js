@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const passport = require('passport');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 app.use(express.json());
 
@@ -52,10 +53,15 @@ passport.use(new LocalStrategy(
           return done(null, false);
         }
 
-        if (user.password !== password) {
-          return done(null, false);
-        }
-        return done(null, user);
+        bcrypt.compare(password, user.passwordHash, (err, isValid) => {
+          if (err) {
+            return done(err)
+          }
+          if (!isValid) {
+            return done(null, false)
+          }
+          return done(null, user)
+        })
       });
   }
 ));
