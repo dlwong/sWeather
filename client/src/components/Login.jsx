@@ -24,16 +24,21 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 
+const Span = styled.span`
+  color: red
+`;
+
 class Login extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      error: false
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleRecommendation = this.handleRecommendation.bind(this);
   }
 
   handleChange(e){
-    console.log(e.target.name)
     this.setState(
         {[e.target.name]: e.target.value}
     )
@@ -55,7 +60,7 @@ class Login extends Component {
         if (response.data === 'success') {
           history.push('/recommendation');
         } else {
-          console.log('Sign-up error');
+          this.setState({error: true})
         }
       })
       .catch(error => {
@@ -64,6 +69,14 @@ class Login extends Component {
   }
 
   render() { 
+    let isError;
+
+    if (this.state.error) {
+      isError = true;
+    }else {
+      isError = false;
+    }
+
     return (
       <Wrapper>
         <Form>
@@ -80,6 +93,12 @@ class Login extends Component {
             <Input type="submit" value="FORGOT PASSWORD" onClick={this.handlePassword} />
           </div>
         </Form>
+        {
+          isError && 
+          <Span>
+          INCORRECT USERNAME OR/AND PASSWORD
+          </Span>
+        }
       </Wrapper>
     )
   }

@@ -1,12 +1,10 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-//app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../client/public')));
@@ -54,7 +52,7 @@ passport.use(new LocalStrategy(
           return done(null, false);
         }
 
-        if (user.password != password) {
+        if (user.password !== password) {
           return done(null, false);
         }
         return done(null, user);
@@ -62,32 +60,8 @@ passport.use(new LocalStrategy(
   }
 ));
 
-
-
-// app.post('/login',
-//   passport.authenticate('local', { failureRedirect: '/error' }),
-//   function(req, res) {
-//     res.redirect('/success');
-//   });
-
-// app.post('/login', (req, res) => {
-//   const {username, password} = req.body;
-//       passport.authenticate('local', 
-//         { successRedirect: '/success',
-//         failureRedirect: '/error' })
-// });
-
 app.post('/login',
   passport.authenticate('local', { failureRedirect: '/error' }),
-  function(req, res) {
-    res.redirect('/success?username='+req.user.username);
+  (req, res) => {
+    res.redirect('/success');
   });
-
-// app.post('/login', (req, res) => {
-//   const {username, password} = req.body;
-//   UserDetails.find({username
-//   }, (err, doc) => {
-//     if (err) {res.send(err)}
-//     res.send(doc)
-//   })
-// });
