@@ -33,6 +33,7 @@ class Login extends Component {
   }
 
   handleChange(e){
+    console.log(e.target.name)
     this.setState(
         {[e.target.name]: e.target.value}
     )
@@ -45,23 +46,21 @@ class Login extends Component {
 
   handleRecommendation(e) {
     e.preventDefault();
-    history.push('/recommendation');
-    // const { username, password } = this.state;
-    // axios.post('/login', {
-    //   username,
-    //   password
-    // })
-    //   .then(response => {
-    //     if (response.data) {
-    //         console.log(response.data)
-    //         //history.push('/recommendation');
-    //     } else {
-    //       console.log('Sign-up error');
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
+    const { username, password } = this.state;
+    axios.post('/login', {
+      username,
+      password
+    })
+      .then(response => {
+        if (response.data === 'success') {
+          history.push('/recommendation');
+        } else {
+          console.log('Sign-up error');
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   render() { 
