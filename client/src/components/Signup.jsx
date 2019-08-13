@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import history from './history';
 
 const Wrapper = styled.div`
-padding: 4em;
-text-align: center;
+  padding: 4em;
+  text-align: center;
 `;
 
 const Form = styled.form`
