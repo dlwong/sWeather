@@ -28,6 +28,7 @@ passport.deserializeUser((id, cb) => {
 });
 
 mongoose.connect('mongodb://localhost/MyDatabase', { useNewUrlParser: true });
+mongoose.set('useCreateIndex', true);
 
 const Schema = mongoose.Schema;
 
