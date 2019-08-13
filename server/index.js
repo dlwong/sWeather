@@ -32,10 +32,17 @@ mongoose.connect('mongodb://localhost/MyDatabase', { useNewUrlParser: true });
 const Schema = mongoose.Schema;
 
 const UserDetail = new Schema({
-      username: String,
-      password: String
+      username: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+      password: {
+        type: String,
+        required: true
+      }
     });
-    
+
 const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
 
 const LocalStrategy = require('passport-local').Strategy;
@@ -74,10 +81,12 @@ app.post('/login',
   });
 
 app.post('/register', (req, res, next) => {
+
   let newUser = new UserDetails({
     username: req.body.username,
     password: req.body.password
   });
+
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err);
     bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -87,9 +96,13 @@ app.post('/register', (req, res, next) => {
       console.log('after', newUser.password)
       // Store the user to the database, then send the response
       newUser.save(function (err) {
-        if (err) return handleError(err);
+        if (err) {
+          res.status(205).send('account exists'); 
+          return console(err)
+        };
       });
     });
   });
   res.status(200).send('success');
+
 });

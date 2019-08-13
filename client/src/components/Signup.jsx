@@ -38,7 +38,6 @@ class Signup extends Component {
       password
     })
       .then(response => {
-        console.log(response.data)
         if (response.data === 'success') {
           history.push('/recommendation');
         } else {
