@@ -18,7 +18,7 @@ export default function Password() {
           </div>
           <form data-test-ref="form">
             <div className="m-field">
-              <label className="m-field--label">Email Address</label>
+              <label className="m-field--label">Email Address</label>&nbsp;
               <input type="email" name="recoverPassword.email" value="" />
             </div><br/>
             <button className="m-button bg-azuren" type="submit" tabindex="0">

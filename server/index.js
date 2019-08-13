@@ -6,7 +6,9 @@ const port = process.env.PORT || 3000;
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.listen(port , () => console.log('App listening on port ' + port));
 
@@ -41,18 +43,16 @@ const LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-      UserDetails.findOne({
-        username: username
+      UserDetails.find({
+        username
       }, function(err, user) {
         if (err) {
           return done(err);
         }
-
         if (!user) {
           return done(null, false);
         }
-
-        if (user.password != password) {
+        if (user.password !== password) {
           return done(null, false);
         }
         return done(null, user);
@@ -60,11 +60,24 @@ passport.use(new LocalStrategy(
   }
 ));
 
-// app.post('/',
+// app.post('/login',
 //   passport.authenticate('local', { failureRedirect: '/error' }),
 //   function(req, res) {
 //     res.redirect('/success');
 //   });
 
-  // app.post('/', passport.authenticate('local', { successRedirect: '/success',
-  // failureRedirect: '/error' }));
+app.post('/login', (req, res) => {
+  const {username, password} = req.body;
+      passport.authenticate('local', 
+        { successRedirect: '/success',
+        failureRedirect: '/error' })
+});
+
+// app.post('/login', (req, res) => {
+//   const {username, password} = req.body;
+//   UserDetails.find({username
+//   }, (err, doc) => {
+//     if (err) {res.send(err)}
+//     res.send(doc)
+//   })
+// });
