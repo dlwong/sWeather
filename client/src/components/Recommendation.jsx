@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   font-family: 'Montserrat';
@@ -9,44 +10,64 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Recommendation = () => {
+class Recommendation extends Component {
+  constructor(props){
+    super(props);
 
-  const randomInt = Math.floor(Math.random() * 6) + 1;
-  let title, url;
-
-  switch (randomInt) {
-    case 1:
-      title = 'COOPER say STAY COOL';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/cool.png';
-      break;
-    case 2:
-      title = 'MAX says IT\'S A HOODIE KIND OF WEATHER';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/hoodie.png';
-      break;
-    case 3:
-      title = 'MILLIE says IT\'S A LIL CHILLY SO WEAR DAT PUFFER';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/puffer.png';
-      break;
-    case 4:
-      title = 'BEAR says IT\'S GONNA BE RAININ\', KEEP YO\' SELF DRY';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/rain.png';
-      break;    
-    case 5:
-      title = 'ROCKY says IT\'S GONNA BE A TORNADO';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/sad.png';
-      break; 
-    case 6:
-      title = 'DUKE says IT\'S GONNA BE A WINDY DAY';
-      url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/wind.png';
-      break; 
+    this.state = {
+      predict: 0,
+    }
   }
 
-  return ( 
-    <Wrapper>
-      <h1>{title}</h1>
-      <img src={url} />
-    </Wrapper>
-    )
-}
+  componentDidMount() {
+    axios.get('/recs')
+    .then(res => {
+      this.setState({predict: res.data.value});
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
-export default Recommendation;
+  render() {
+    // const randomInt = Math.floor(Math.random() * 6) + 1;
+    const { predict } = this.state;
+    let title, url;
+
+        switch (true) {
+          case (predict > 5):
+            title = 'COOPER say STAY COOL';
+            url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/cool.png';
+            break;
+          case (predict > 4.5):
+            title = 'MAX says IT\'S A HOODIE KIND OF WEATHER';
+            url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/hoodie.png';
+            break;
+          case (predict > 3):
+            title = 'MILLIE says IT\'S A LIL CHILLY SO WEAR DAT PUFFER';
+            url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/puffer.png';
+            break;
+          case (predict > 2.5):
+            title = 'BEAR says IT\'S GONNA BE RAININ\', KEEP YO\' SELF DRY';
+            url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/rain.png';
+            break;    
+          case (predict > 2):
+            title = 'ROCKY says IT\'S GONNA BE A TORNADO';
+            url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/sad.png';
+            break; 
+          case (predict > 1):
+            title = 'DUKE says IT\'S GONNA BE A WINDY DAY';
+            url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/wind.png';
+            break; 
+        }
+    
+      return ( 
+        <Wrapper>
+          <h1>{title}</h1>
+          <img src={url} />
+        </Wrapper>
+      )
+  }
+}
+  
+  export default Recommendation;

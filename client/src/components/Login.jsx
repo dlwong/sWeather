@@ -11,14 +11,6 @@ const Form = styled.form`
   transform: translate(-50%, -50%);
 `;
 
-const Label = styled.label`
-  font-family: 'Montserrat';
-`;
-
-const Input = styled.input`
-  font-family: 'Montserrat';
-`;
-
 const Wrapper = styled.div`
   padding: 4em;
   text-align: center;
@@ -81,16 +73,16 @@ class Login extends Component {
       <Wrapper>
         <Form>
           <div>
-            <Label>Username:</Label>
+            <label>Username:</label>
             <input type="text" name="username" placeholder="Username" onChange={e => this.handleChange(e)} />
           </div><br />
           <div>
-            <Label>Password:</Label>
+            <label>Password:</label>
             <input type="password" name="password" placeholder="Password" onChange={e => this.handleChange(e)}/>
           </div><br />
           <div>
-            <Input type="submit" value="LOGIN"  onClick={(e)=> this.handleRecommendation(e)}/><br/><br/>
-            <Input type="submit" value="FORGOT PASSWORD" onClick={this.handlePassword} />
+            <input type="submit" value="LOGIN"  onClick={(e)=> this.handleRecommendation(e)}/><br/><br/>
+            <input type="submit" value="FORGOT PASSWORD" onClick={this.handlePassword} />
           </div>
         </Form>
         {

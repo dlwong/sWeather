@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 const passport = require('passport');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const api = require('../helper/weather_api.js');
 
 app.use(express.json());
 
@@ -82,7 +83,6 @@ app.post('/login',
   });
 
 app.post('/register', (req, res, next) => {
-
   let newUser = new UserDetails({
     username: req.body.username,
     password: req.body.password
@@ -98,7 +98,7 @@ app.post('/register', (req, res, next) => {
       // Store the user to the database, then send the response
       newUser.save(function (err) {
         if (err) {
-          res.status(200).send('account exists'); 
+          res.status(200).send('account exists already'); 
           return console.log(err);
         };
       });
@@ -106,4 +106,11 @@ app.post('/register', (req, res, next) => {
   });
   res.status(200).send('success');
 
+});
+
+app.get('/recs', (req, res) => {
+  api.getWind(value => {
+      console.log('Wind Speed: ',value);
+      res.send({'value': value})
+  })
 });
