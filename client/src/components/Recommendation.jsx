@@ -30,7 +30,6 @@ class Recommendation extends Component {
   }
 
   render() {
-    // const randomInt = Math.floor(Math.random() * 6) + 1;
     const { predict } = this.state;
     let title, url;
 
