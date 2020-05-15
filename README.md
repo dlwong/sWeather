@@ -13,7 +13,7 @@
 
 ## Stack
 
-<b>Front-end:</b> JavaScript, React, React Router
+<b>Front-end:</b> JavaScript, React, React-Router, Styled Components
 <br />
 <b>Back-end:</b> Node.js, Express, Accuweather API, Passport/Bcrypt
 <br />
