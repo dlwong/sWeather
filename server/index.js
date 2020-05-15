@@ -47,12 +47,17 @@ const Schema = mongoose.Schema;
 const UserDetail = new Schema({
       username: {
         type: String,
-        required: true,
-        unique: true,
+        required: false,
+        unique: false,
       },
       password: {
         type: String,
         required: true
+      },
+      email: {
+        type: String,
+        required: false,
+        unique: false
       }
     });
 
@@ -101,7 +106,8 @@ app.post(
 app.post('/register', (req, res, next) => {
   let newUser = new UserDetails({
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    email: req.body.email
   });
   // salt to fight rainbow table attacks and brute force if someone gains access to the db
   // salt_work_factor is default 10, but we are being explicit here
@@ -131,12 +137,22 @@ app.post('/register', (req, res, next) => {
   res.status(200).send('success');
 });
 
-// app.get('/recs', (req, res) => {
-//   api.getWind((err, value) => {
-//       console.log('Wind Speed: ',value);
-//       res.send({'value': value})
-//   })
-// });
+app.post('/forgotPassword', (req, res) => {
+  if (req.body.email === ''){
+    res.status(400).send('email required')
+  }
+  console.error(req.body.email)
+
+})
+
+
+app.get('/recs', (req, res) => {
+  res.send({'value': 3})
+  // api.getWind((err, value) => {
+  //     console.log('Wind Speed: ',value);
+  //     res.send({'value': value})
+  // })
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/public/index.html'));

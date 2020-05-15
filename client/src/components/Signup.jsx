@@ -32,10 +32,11 @@ class Signup extends Component {
 
   handleRecommendation(e) {
     e.preventDefault();
-    const { username, password } = this.state;
+    const { username, password, email } = this.state;
     axios.post('/register', {
       username,
-      password
+      password,
+      email
     })
       .then(response => {
         if (response.data === 'success') {
@@ -61,6 +62,10 @@ class Signup extends Component {
           <div>
             <label>Password:</label>
             <input type="password" name="password" placeholder="password" onChange={e => this.handleChange(e)} />
+          </div><br />
+          <div>
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="email" onChange={e => this.handleChange(e)} />
           </div><br />
           <div>
             <label>Do You Get Cold Easily?</label><br />
