@@ -9,7 +9,10 @@ const mongoose = require('mongoose');
 // It is designed to be computationally expensive to compute and it has a configurable work factor that can be used to increase 
 // the expense to help keep pace with the relentless growth in computing power.
 const bcrypt = require('bcrypt');
-const api = require('../helper/weather_api.js');
+// const api = require('../helper/weather_api.js');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
 
 app.use(express.json());
 
@@ -128,12 +131,12 @@ app.post('/register', (req, res, next) => {
   res.status(200).send('success');
 });
 
-app.get('/recs', (req, res) => {
-  api.getWind((err, value) => {
-      console.log('Wind Speed: ',value);
-      res.send({'value': value})
-  })
-});
+// app.get('/recs', (req, res) => {
+//   api.getWind((err, value) => {
+//       console.log('Wind Speed: ',value);
+//       res.send({'value': value})
+//   })
+// });
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/public/index.html'));
