@@ -109,8 +109,12 @@ app.post('/register', (req, res, next) => {
 });
 
 app.get('/recs', (req, res) => {
-  api.getWind(value => {
+  api.getWind((err, value) => {
       console.log('Wind Speed: ',value);
       res.send({'value': value})
   })
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/public/index.html'));
 });
