@@ -35,7 +35,7 @@ class Recommendation extends Component {
 
         switch (true) {
           case (predict > 5):
-            title = 'COOPER say STAY COOL';
+            title = 'COOPER says STAY COOL';
             url = 'https://weatherdogs.s3-us-west-1.amazonaws.com/cool.png';
             break;
           case (predict > 4.5):
