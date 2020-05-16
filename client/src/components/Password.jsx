@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   font-family: 'Montserrat';
@@ -10,15 +11,31 @@ const Wrapper = styled.div`
 `;
 
 class Password extends Component {
-  // constructor(props){
-  //   super(props)
+  constructor(){
+    super();
+    this.state = {
+                  email:''
+                  }
+  }
 
-  //   // this.handleForgotPassword = this.handleForgotPassword.bind(this)
-  // }
+  handleChange = (evt) => {
+    this.setState({email: evt.target.value})
+  }
 
   handleForgotPassword(evt) {
     evt.preventDefault();
-    console.log('hello')
+
+    if (this.state.email !== '') {
+      axios.post('/forgotPassword',{
+        email: this.state.email,
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error.data)
+      })
+    }
   }
 
   render() {
@@ -31,9 +48,9 @@ class Password extends Component {
         <form data-test-ref="form">
           <div className="m-field">
             <label className="m-field--label">Email Address</label>&nbsp;
-            <input type="email" name="recoverPassword.email" value="" />
+            <input type="email" onChange={this.handleChange} />
           </div><br/>
-          <button className="m-button bg-azuren" onClick={this.handleForgotPassword}>
+          <button className="m-button bg-azuren" onClick={(evt) => this.handleForgotPassword(evt)}>
             <span className="l-nowrap">Reset Password</span>
           </button>
         </form>
