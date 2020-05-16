@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import history from './history';
 
 const Wrapper = styled.div`
   font-family: 'Montserrat';
@@ -30,6 +31,7 @@ class Password extends Component {
         email: this.state.email,
       })
       .then(response => {
+        history.push('/');
         console.log(response.data);
       })
       .catch(error => {
