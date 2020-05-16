@@ -58,6 +58,14 @@ const UserDetail = new Schema({
         type: String,
         required: false,
         unique: false
+      },
+      resetPasswordToken: {
+        type: String,
+        default: ''
+      },
+      resetPasswordExpires: {
+        type: Date,
+        default: '2020-05-15'
       }
     });
 
@@ -138,63 +146,74 @@ app.post('/register', (req, res, next) => {
 });
 
 app.post('/forgotPassword', (req, res) => {
-  console.log(req.body.email)
-  res.status(200).send('okay')
-  // if (req.body.email === ''){
-  //   res.status(400).send('email required')
-  // }
-  // console.error(req.body.email)
-  // UserDetails.findOne({
-  //   email: req.body.email
-  // }).then(user => {
-  //   if (user === null){
-  //     console.error('email not in db');
-  //     res.status(403).send('email not in db')
-  //   }else {
-  //     // generate a unique hash
-  //     const token = crypto.randomBytes(20).toString('hex')
-  //     // 1 hour token is valid
-  //     user.update({
-  //       resetPasswordToken: token,
-  //       resetPasswordExpires: Date.now() + 3600000
-  //     });
-      
-      // generate test account
-      const testAccount = nodemailer.createTestAccount();
-      
-      // account sending the reset password email
-      const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
-        auth: {
-          user: testAccount.user,
-          pass: testAccount.pass,
-        },
-        // server: 'gmail',
-        // auth: {
-        //   user: `${process.env.EMAIL_ADDRESS}`,
-        //   pass: `${process.env.EMAIL_PASSWORD}`
-        // },
-      });
+  const { email } = req.body;
 
-      const mailOptions = {
-        from: 'no-reply@example.com',
-        to: `${user.email}`,
-        subject: 'Link to Reset Password',
-        // text: `http://localhost:3000/reset/${token}`
-      };
+  if (email === ''){
+    res.status(400).send('email required')
+  }
+  UserDetails.findOneAndUpdate({
+    email: email},{
+    resetPasswordToken: 'hello'
+    }, (err, response) => {
+      if (err){
+        res.send('Error saving:',err)
+      }
+      res.send(response)
+    }
+  )
+// .then(user => {
+//     if (user === null){
+//       console.error('email not in db');
+//       res.status(403).send('email not in db')
+//     }else {
+//       // generate a unique hash
+//       const token = crypto.randomBytes(20).toString('hex')
+//       // 1 hour token is valid
+//       console.error(user)
+//       UserDetails.updateOne({email:req.body.email}, {
+//         resetPasswordToken: token,
+//         resetPasswordExpires: Date.now() + 3600000
+//       });
+//       console.error(user.resetPasswordToken)
 
-      console.log('sending email')
+
+
+      // // generate test account
+      // const testAccount = nodemailer.createTestAccount();
+      
+      // // account sending the reset password email
+      // const transporter = nodemailer.createTransport({
+      //   host: "smtp.ethereal.email",
+      //   port: 587,
+      //   secure: false,
+      //   auth: {
+      //     user: testAccount.user,
+      //     pass: testAccount.pass,
+      //   },
+      //   // server: 'gmail',
+      //   // auth: {
+      //   //   user: `${process.env.EMAIL_ADDRESS}`,
+      //   //   pass: `${process.env.EMAIL_PASSWORD}`
+      //   // },
+      // });
+
+      // const mailOptions = {
+      //   from: 'no-reply@example.com',
+      //   to: `${user.email}`,
+      //   subject: 'Link to Reset Password',
+      //   // text: `http://localhost:3000/reset/${token}`
+      // };
+
+      // console.log('sending email')
       // send the email
-      transporter.sendMail(mailOptions, (err, res) => {
-        if (err){
-          console.error('there was an error', err)
-        }else {
-          console.log('here is the response:', response);
-          res.status(200).json('recovery email sent');
-        }
-      });
+      // transporter.sendMail(mailOptions, (err, res) => {
+      //   if (err){
+      //     console.error('there was an error', err)
+      //   }else {
+      //     console.log('here is the response:', response);
+      //     res.status(200).json('recovery email sent');
+      //   }
+      // });
   //   }
   // });
 })
