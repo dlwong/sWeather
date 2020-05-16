@@ -162,6 +162,7 @@ app.post('/forgotPassword', (req, res) => {
     email: email}, (err, user) => {
       if (err){
         res.status(403).send(err);
+        return console.error('Email does not exist in db')
       }
 
       // generate a unique hash
@@ -175,28 +176,12 @@ app.post('/forgotPassword', (req, res) => {
       user.save(err => {
         if (err){
           res.status(403).send(err);
-          return console.log(err);
+          return console.error('Error updating in db');
         }
-        res.status(200).send('success');
+        res.status(200).send('Successful Update');
       })
     }
   )
-// .then(user => {
-//     if (user === null){
-//       console.error('email not in db');
-//       res.status(403).send('email not in db')
-//     }else {
-//       // generate a unique hash
-//       const token = crypto.randomBytes(20).toString('hex')
-//       // 1 hour token is valid
-//       console.error(user)
-//       UserDetails.updateOne({email:req.body.email}, {
-//         resetPasswordToken: token,
-//         resetPasswordExpires: Date.now() + 3600000
-//       });
-//       console.error(user.resetPasswordToken)
-
-
 
       // // generate test account
       // const testAccount = nodemailer.createTestAccount();
