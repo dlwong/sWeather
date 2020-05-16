@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const credentials = require('../credentials');
 
 // passport is a modular authentication middlware
 const passport = require('passport'); 
@@ -180,47 +181,46 @@ app.post('/forgotPassword', (req, res) => {
         }
         res.status(200).send('Successful Update');
       })
-    }
-  )
 
-      // // generate test account
-      // const testAccount = nodemailer.createTestAccount();
+      // generate test account
+      // let testAccount = nodemailer.createTestAccount();
       
-      // // account sending the reset password email
-      // const transporter = nodemailer.createTransport({
-      //   host: "smtp.ethereal.email",
-      //   port: 587,
-      //   secure: false,
-      //   auth: {
-      //     user: testAccount.user,
-      //     pass: testAccount.pass,
-      //   },
-      //   // server: 'gmail',
-      //   // auth: {
-      //   //   user: `${process.env.EMAIL_ADDRESS}`,
-      //   //   pass: `${process.env.EMAIL_PASSWORD}`
-      //   // },
-      // });
+      // account sending the reset password email
+      let transporter = nodemailer.createTransport({
+        // host: "smtp.ethereal.email",
+        // port: 587,
+        // secure: false,
+        // auth: {
+        //   user: testAccount.user,
+        //   pass: testAccount.pass,
+        // },
+        service: 'gmail',
+        auth: {
+          user: `${credentials.EMAIL_ADDRESS}`,
+          pass: `${credentials.EMAIL_PASSWORD}`
+        },
+      });
 
-      // const mailOptions = {
-      //   from: 'no-reply@example.com',
-      //   to: `${user.email}`,
-      //   subject: 'Link to Reset Password',
-      //   // text: `http://localhost:3000/reset/${token}`
-      // };
+      const mailOptions = {
+        from: 'no-reply@example.com',
+        to: 'pingki@sbcglobal.net',
+        // to: `${user.email}`,
+        subject: 'Link to Reset Password',
+        // text: `http://localhost:3000/reset/${token}`
+      };
 
-      // console.log('sending email')
-      // send the email
-      // transporter.sendMail(mailOptions, (err, res) => {
-      //   if (err){
-      //     console.error('there was an error', err)
-      //   }else {
-      //     console.log('here is the response:', response);
-      //     res.status(200).json('recovery email sent');
-      //   }
-      // });
-  //   }
-  // });
+      console.log('sending email')
+
+      //send the email
+      transporter.sendMail(mailOptions, (err, res) => {
+        if (err){
+          console.error('there was an error sending email', err)
+        }else {
+          console.log('here is the response:', response);
+          res.status(200).json('recovery email sent');
+        }
+      });
+  })
 })
 
 
