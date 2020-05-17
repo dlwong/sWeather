@@ -223,6 +223,21 @@ app.post('/forgotpassword', (req, res) => {
   })
 })
 
+app.get('/resetpassword', (req, res) => {
+  UserDetails.findOne({
+    resetPasswordToken: req.query.resetPasswordToken,
+    // resetPasswordExpires: {
+    //   $lte: Date.now()
+    // },
+  }, (err, user) => {
+    if (err){
+      console.error(err)
+    }else{
+      res.status(200).send(user)
+    }
+  })
+})
+
 
 app.get('/recs', (req, res) => {
   res.send({'value': 3})
