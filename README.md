@@ -15,7 +15,7 @@
 
 <b>Front-end:</b> JavaScript, React, React-Router, Styled Components
 <br />
-<b>Back-end:</b> Node.js, Express, Accuweather API, Passport/Bcrypt
+<b>Back-end:</b> Node.js, Express, Accuweather API, Passport/Bcrypt, Nodemailer
 <br />
 <b>Database:</b> MongoDB
 
