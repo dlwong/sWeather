@@ -1,10 +1,10 @@
 const request = require('request');
-const config = require('../config.js');
+const credentials = require('../credentials.js');
 
 const getWind = (callback) => {
 
   const options = {
-    url: `http://dataservice.accuweather.com/forecasts/v1/daily/1day/94107?apikey=${config.password}&details=true`,
+    url: `http://dataservice.accuweather.com/forecasts/v1/daily/1day/94107?apikey=${credentials.weather_api_password}&details=true`,
   };
 
   request.get(options,(error, response, body) => {
