@@ -224,8 +224,11 @@ app.post('/forgotpassword', (req, res) => {
 })
 
 app.get('/resetpassword', (req, res) => {
+  // console.error(req.query.resetPasswordToken)
   UserDetails.findOne({
     resetPasswordToken: req.query.resetPasswordToken,
+
+    // Time limit honoured for the token
     // resetPasswordExpires: {
     //   $lte: Date.now()
     // },
@@ -233,9 +236,36 @@ app.get('/resetpassword', (req, res) => {
     if (err){
       console.error(err)
     }else{
-      res.status(200).send(user)
+      res.status(200).send({
+        username: user.username,
+        message: 'password link is fine'
+      })
     }
   })
+})
+
+app.put('/updatePassword', (req, res) => {
+  UserDetails.findOne({
+    username: req.body.username
+  }, (err, user) => {
+      if (err){
+        console.error('Error finding user in db')
+      }else {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          if (err) {
+            return next(err);
+          }
+          user.password = hash; 
+          user.save(function (err) {
+            if (err) {
+              res.status(200).send('Could not save new password'); 
+              return console.log(err);
+            };
+          });
+        });
+      }
+  })
+  res.status(200).send('Successfully saved new password');
 })
 
 
