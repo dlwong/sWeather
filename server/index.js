@@ -256,6 +256,8 @@ app.put('/updatePassword', (req, res) => {
             return next(err);
           }
           user.password = hash; 
+          user.resetPasswordToken = '';
+          user.resetPasswordExpires = '2020-05-15';
           user.save(function (err) {
             if (err) {
               res.status(200).send('Could not save new password'); 
@@ -265,7 +267,7 @@ app.put('/updatePassword', (req, res) => {
         });
       }
   })
-  res.status(200).send('Successfully saved new password');
+  res.status(200).send('success');
 })
 
 

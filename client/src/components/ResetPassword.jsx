@@ -8,16 +8,13 @@ class ResetPassword extends Component {
     this.state = {
       username:'',
       password:'',
-      confirmPassword:'',
-      update: false,
-      isLoading: true,
-      error: false
+      updated: false,
+      error: false,
+      canUpdate: false
     }
   }
 
   componentDidMount() {
-    // console.log(this.props.match.params.token);
-
     axios
       .get('/resetpassword', {
             params: {
@@ -26,17 +23,14 @@ class ResetPassword extends Component {
       })
       .then(response => {
         if (response.data.message === 'password link is fine'){
-          console.log(response.data.username);
           this.setState({
             username: response.data.username,
-            // update: false,
-            // isLoading: false,
+            canUpdate: true,
             error: false,
           })
         } else {
           this.setState({
-            // update: false,
-            // isLoading: false,
+            canUpdate: false,
             error: true
           })
         }
@@ -60,39 +54,48 @@ class ResetPassword extends Component {
         password: this.state.password,
       })
       .then(response => {
-        console.log(response.data)
-        if (response.data.message === 'Successfully saved new password'){
+        if (response.data === "success"){
           this.setState({
+            canUpdate: false,
             updated: true,
             error: false,
           })
         }else {
           this.setState({
+            canUpdate: false,
             updated: false,
             error: true
           })
+          console.log('or is the problem here')
         }
       })
       .catch(error => {
-        console.log(error.data)
+        console.log("error updating in db", error.data)
       })
   }
 
   render(){
-    // console.log(this.props.match.params.token);
-    // const { error } = this.state;
+    const { error, canUpdate, updated } = this.state;
+
     return (
       <div>
-        {/* {error &&
-        <div>Problem resetting, please submit a new reset link</div>
-        } */}
-        <div>
-          <label>New Password:</label>
-          <input type="password" name="password" placeholder="new password" onChange={evt => this.handleChange(evt)} />
-        </div><br />
-        <div>
-          <input type="submit" value="SUBMIT" onClick={evt => this.handleUpdatePassword(evt)}/>
-        </div>
+        {error &&
+        <div>Problem resetting, please submit a new reset form</div>
+        }
+        {canUpdate && 
+        <form>
+            <div>
+            <label>New Password:</label>
+            <input type="password" name="password" placeholder="new password" onChange={evt => this.handleChange(evt)} />
+          </div><br />
+          <div>
+            <input type="submit" value="SUBMIT" onClick={evt => this.handleUpdatePassword(evt)}/>
+          </div>
+        </form>
+        }
+        {updated &&
+          <div>SUCCESSFULY UPDATED</div>
+        }
       </div>
     )
   }
