@@ -38,7 +38,7 @@ class Login extends Component {
 
   handlePassword(e) {
     e.preventDefault();
-    history.push('/password');
+    history.push('/forgotpassword');
   }
 
   handleRecommendation(e) {

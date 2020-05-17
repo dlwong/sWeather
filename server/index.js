@@ -153,7 +153,7 @@ app.post('/register', (req, res, next) => {
   res.status(200).send('success');
 });
 
-app.post('/forgotPassword', (req, res) => {
+app.post('/forgotpassword', (req, res) => {
   const { email } = req.body;
 
   if (email === ''){
