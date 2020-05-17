@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class ResetPassword extends Component {
-  constructor(){
-    super();
+class ResetPassword extends Component {
+  // constructor(){
+  //   super();
 
-    this.state = {
-      username:'',
-      password:'',
-      confirmPassword:'',
-      update: false,
-      isLoading: true,
-      error: false
-    }
-  }
+  //   this.state = {
+  //     username:'',
+  //     password:'',
+  //     confirmPassword:'',
+  //     update: false,
+  //     isLoading: true,
+  //     error: false
+  //   }
+  // }
 
-  async componentDidMount() {
+  componentDidMount() {
     console.log(this.props.match.params.token);
 
   //   await axios
@@ -79,7 +79,8 @@ export default class ResetPassword extends Component {
   }
 
   render(){
-    const { password, error, isLoading, updated } = this.state;
+    console.log(this.props.match.params.token);
+    // const { password, error, isLoading, updated } = this.state;
     return (
       <h1>
         Password Reset
@@ -87,3 +88,5 @@ export default class ResetPassword extends Component {
     )
   }
 }
+
+export default ResetPassword;

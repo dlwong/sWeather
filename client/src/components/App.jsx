@@ -5,6 +5,7 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import ForgotPassword from './ForgotPassword.jsx';
 import Recommendation from './Recommendation.jsx';
+import ResetPassword from './ResetPassword.jsx';
 import history from './history'
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Route path = '/signup' component = { Signup } />
         <Route path = '/forgotpassword' component = { ForgotPassword } />
         <Route path = '/recommendation' component = { Recommendation} />
+        <Route path = '/resetpassword/:token' component = { ResetPassword } />
       </Router>
       );
 };
